@@ -51,41 +51,43 @@
                     <br>
                     <div  class="results flex items-center w-full rounded p-4">
                         <img src="./img/assets/naira-sign.png" alt="" class="w-4 h-4">
-                        <input type="number" name="" id="" placeholder="200000" class="w-full bg-transparent ml-2">
+                        <input type="number" name="" id="amt" placeholder="200000" class="w-full bg-transparent ml-2">
                     </div>
                 </label>
                 <br>
-                <label for="amt_to_invest" class="block capitalize my-2">
+                <label for="invest_type" class="block capitalize my-2">
                     investment type
                     <br>
-                    <select name="" id="" class="results w-full rounded p-4">
-                        <option value="">Piggybank</option>
-                        <option value="">Safelock</option>
-                        <option value="">Target</option>
+                    <select name="invest_type" id="invest_type" class="results w-full rounded p-4">
+                        <option value="piggyBank">Piggybank</option>
+                        <option value="safeLock">Safelock</option>
+                        <option value="target">Target</option>
+                        <option value="flex">Flex</option>
+                        <option value="flexDollar">Flex Dollar</option>
                     </select>
                 </label>
                 <br>
                 <label for="amt_to_invest" class="block capitalize my-2">
                     duration
                     <br>
-                    <select name="" id="" class="results w-full rounded p-4">
-                        <option value="">3 Months</option>
-                        <option value="">6 Months</option>
-                        <option value="">1 Year</option>
-                        <option value="">2 Years</option>
-                        <option value="">5 Years</option>
+                    <select name="" id="duration" class="results w-full rounded p-4">
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3 Years</option>
+                        <option value="5">5 Years</option>
+                        <option value="10">10 Years</option>
                     </select>
                 </label>
                 <br>
                 <div class="text-center">
-                    <button class="btn uppercase my-4 px-10 py-3">calculate</button>
+                    <button class="btn uppercase my-4 px-10 py-3" id="calc_btn">calculate</button>
                 </div>
             </form>
             <div class="result-cont">
                 <p>Payback Results</p>
                 <div class="results w-full flex justify-around rounded-lg p-6">
-                    <p>total value: <br> <span id="total_value">200</span></p>
-                    <p>interest value: <br> <span id="int_val">20</span></p>
+                    <p>total value: <br> <span id="total_value"></span></p>
+                    <p>interest value: <br> <span id="int_val"></span></p>
                 </div>
                 <div class="text-center">
                     <button class="btn uppercase mt-4 px-10 py-3"> analysis</button>

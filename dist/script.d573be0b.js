@@ -118,11 +118,110 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/script.js":[function(require,module,exports) {
+/* -------------- MOBILE NAVIGATION --------- */
 var navBtn = document.getElementById('mobile-btn');
 navBtn.addEventListener('click', function () {
   var nav = document.getElementById('nav');
   nav.classList.toggle('active-nav');
 });
+/* ----------- INTEREST CALCULATION ---------------------- */
+
+var interestRate = {
+  piggyBank: 10,
+  safeLock: 15.5,
+  target: 10,
+  flex: 10,
+  flexDollar: 6
+};
+
+var simpleInterest = function simpleInterest(amount, interestRate, timeInYears) {
+  var amt = parseInt(amount).toFixed(2);
+  var iR = interestRate / 100;
+  var rT = iR * timeInYears;
+  var total = (amt * (1 + rT)).toFixed(2);
+  var interest = (total - amt).toFixed(2);
+  console.log(amt, interest, total);
+  return [amt, interest, total];
+};
+
+var calcInterest = function calcInterest() {
+  var input = {
+    amount: document.getElementById('amt').value,
+    InvestmentType: document.getElementById('invest_type').value,
+    time: document.getElementById('duration').value
+  };
+  var amtToDolar = input.amount / 400;
+  var piggyBankI = simpleInterest(input.amount, interestRate.piggyBank, input.time);
+  var safeLockI = simpleInterest(input.amount, interestRate.safeLock, input.time);
+  var flexDollarI = simpleInterest(amtToDolar, interestRate.flexDollar, input.time);
+  var interest = {
+    piggyBank: piggyBankI,
+    safeLock: safeLockI,
+    target: piggyBankI,
+    flex: piggyBankI,
+    flexDollar: flexDollarI
+  };
+  console.log(interest);
+  showResult(interest, input.InvestmentType, input.time);
+};
+
+var showResult = function showResult(interest, investmentType, time) {
+  switch (investmentType) {
+    case 'piggyBank':
+      document.getElementById('total_value').innerHTML = "".concat(interest.piggyBank[2]);
+      document.getElementById('int_val').innerHTML = "".concat(interest.piggyBank[1], " at ").concat(interestRate.piggyBank, "% / annum For ").concat(time, " year(s)");
+      break;
+
+    case 'safeLock':
+      document.getElementById('total_value').innerHTML = "".concat(interest.safeLock[2]);
+      document.getElementById('int_val').innerHTML = "".concat(interest.safeLock[1], " at ").concat(interestRate.safeLock, "% / annum For ").concat(time, " year(s)");
+      break;
+
+    case 'target':
+      document.getElementById('total_value').innerHTML = "".concat(interest.target[2]);
+      document.getElementById('int_val').innerHTML = "".concat(interest.target[1], " at ").concat(interestRate.target, "% / annum For ").concat(time, " year(s)");
+      break;
+
+    case 'flex':
+      document.getElementById('total_value').innerHTML = "".concat(interest.flex[2]);
+      document.getElementById('int_val').innerHTML = "".concat(interest.flex[1], " at ").concat(interestRate.flex, "% / annum For ").concat(time, " year(s)");
+      break;
+
+    case 'flexDollar':
+      document.getElementById('total_value').innerHTML = "".concat(interest.flexDollar[2]);
+      document.getElementById('int_val').innerHTML = "".concat(interest.flexDollar[1], " at ").concat(interestRate.flexDollar, "% / annum For ").concat(time, " year(s)");
+      break;
+
+    default:
+      break;
+  }
+};
+
+calcInterest(50000, 0.5);
+var calc_btn = document.getElementById('calc_btn');
+calc_btn.addEventListener('click', function (e) {
+  e.preventDefault();
+  calcInterest();
+});
+/* 10% per annum on Piggybank
+Up to 15.5% per annum on SafeLock
+10% per annum on Target 
+10% per annum on Flex
+6% per annum on Flex Dollar
+Up to 25% on Investify */
+
+/* A = P (1 + rt)
+A	= 	final amount
+P	= 	initial principal balance
+r	= 	annual interest rate
+t	= 	time (in years) */
+
+/* A = P(1 + \frac{r}{n})^{nt}
+A	= 	final amount
+P	= 	initial principal balance
+r	= 	interest rate
+n	= 	number of times interest applied per time period
+t	= 	number of time periods elapsed */
 },{}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -151,7 +250,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58705" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64488" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
